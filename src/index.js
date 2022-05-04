@@ -1,6 +1,6 @@
 import "./scss/main.scss";
 
-window.onload = function () {
+window.onload = () => {
   const { body } = document;
   const createArticle = (tag, className = null, text = "") => {
     const article = document.createElement(`${tag}`);
@@ -14,6 +14,6 @@ window.onload = function () {
     "subtitle",
     `To switch the keyboard layout, use the keys " "+ " "`
   );
-  const entryField = createArticle("textarea", "entryField", "Enter yor text");
+  const entryField = createArticle("textarea", "entryField");
   body.append(title, subtitle, entryField);
 };
