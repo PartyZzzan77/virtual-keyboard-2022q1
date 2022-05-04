@@ -1,0 +1,13 @@
+//vendors
+@import"~normalize.css";
+@import"./base/reset";
+
+//abstracts
+@import "./abstracts/variables";
+
+//components
+@import "./../components/title/title";
+@import "./../components/subtitle/subtitle";
+@import"./../components/EntryField/entryField.scss";
+@import"./../components/Keyboard/Keyboard.scss";
+
