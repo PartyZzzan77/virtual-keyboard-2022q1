@@ -1,4 +1,5 @@
 import "./scss/main.scss";
+import Keyboard from "./components/Keyboard/Keyboard";
 
 window.onload = () => {
   const { body } = document;
@@ -16,4 +17,8 @@ window.onload = () => {
   );
   const entryField = createArticle("textarea", "entryField");
   body.append(title, subtitle, entryField);
+
+  const keyboard = new Keyboard();
+
+  keyboard.init();
 };
