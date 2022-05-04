@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "virtual-keyboard",
   "version": "1.0.0",
-  "description": "",
+  "description": "virtual keyboard treatment project RS School Stage#1",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
@@ -12,9 +12,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
-  "keywords": "",
   "author": "PartyZzzan77 <partyzan327@gmail.com>",
-  
   "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/core": "^7.17.10",
