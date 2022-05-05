@@ -2,9 +2,17 @@ export default class keyboard {
   constructor() {
     this.main = null;
     this.keysContainer = null;
-    this.keys = null;
-    this.lang = {
+
+    this.props = {
+      value: "",
+      capsLock: false,
+    };
+  }
+
+  run() {
+    const langs = {
       en: [
+        "EN",
         "`",
         "1",
         "2",
@@ -71,6 +79,7 @@ export default class keyboard {
         "ctrl R",
       ],
       ru: [
+        "RU",
         "ё",
         "1",
         "2",
@@ -137,26 +146,17 @@ export default class keyboard {
         "ctrl R",
       ],
     };
-    this.handlers = {
-      input: null,
-      close: null,
-    };
-    this.props = {
-      value: "",
-      capsLock: false,
-    };
-  }
+    window.localStorage.setItem("en", JSON.stringify(langs.en));
+    window.localStorage.setItem("ru", JSON.stringify(langs.ru));
 
-  init() {
     this.main = document.createElement("div");
     this.main.classList.add("keyboard", "keyboard_hidden");
+
     this.keysContainer = document.createElement("div");
     this.keysContainer.className = "keyboard__keys";
-
     this.keysContainer.append(this.#createKeys());
 
     const field = document.querySelector(".entryField");
-
     field.addEventListener("focus", () => {
       this.main.classList.remove("keyboard_hidden");
       field.value = this.props.value;
@@ -183,6 +183,18 @@ export default class keyboard {
         const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
         this.#toggleCapsLock(keys);
       }
+
+      if (target.innerHTML === "EN") {
+        localStorage.setItem("lang", "false");
+        this.keysContainer.innerHTML = "";
+        this.keysContainer.append(this.#createKeys());
+      }
+      if (target.innerHTML === "RU") {
+        window.localStorage.setItem("lang", "true");
+        this.keysContainer.innerHTML = "";
+        this.keysContainer.append(this.#createKeys());
+      }
+
       if (
         target.innerHTML === "hide 🥷🏻" ||
         target === document.body ||
@@ -206,17 +218,23 @@ export default class keyboard {
   }
 
   #createKeys() {
+    const lang = JSON.parse(localStorage.getItem("lang"));
+    const en = JSON.parse(localStorage.getItem("en"));
+    const ru = JSON.parse(localStorage.getItem("ru"));
+
+    const currentLang = lang ? en : ru;
+
     const fragment = document.createDocumentFragment();
-    this.lang.en.forEach((key) => {
+    currentLang.forEach((key) => {
       const keyElem = document.createElement("button");
       keyElem.classList.add("keyboard__key");
       keyElem.setAttribute("type", "button");
       keyElem.innerHTML = key;
 
-      if (key === "tab") {
+      if (key === "tab" || key === "del") {
         keyElem.classList.add("keyboard__key_small");
       }
-      if (key === "shift left" || key === "shift right" || key === "del") {
+      if (key === "shift left" || key === "shift right") {
         keyElem.classList.add("keyboard__key_large");
       }
       if (key === "caps lock") {
