@@ -2,6 +2,7 @@ export default class keyboard {
   constructor() {
     this.main = null;
     this.keysContainer = null;
+    this.keys = null;
     this.lang = {
       en: [
         "`",
@@ -63,11 +64,11 @@ export default class keyboard {
         "meta",
         "alt L",
         "",
-        "alt R",
+        "alt r",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl R",
+        "ctrl r",
       ],
       ru: [
         "ё",
@@ -129,11 +130,11 @@ export default class keyboard {
         "meta",
         "alt L",
         "",
-        "alt R",
+        "alt r",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl R",
+        "ctrl r",
       ],
     };
     this.handlers = {
@@ -155,12 +156,40 @@ export default class keyboard {
     this.keysContainer = document.createElement("div");
     this.keysContainer.className = "keyboard__keys";
 
+    this.keysContainer.append(this.#createKeys());
+    this.keysContainer.addEventListener("click", (e) => {
+      const { target } = e;
+      if (target.innerHTML === "return") {
+        this.props.value += "\n";
+      }
+      if (target.innerHTML === "") {
+        this.props.value += " ";
+      }
+      if (target.innerHTML === "tab") {
+        this.props.value += "  ";
+      }
+      if (target.innerHTML === "del") {
+        const { value } = this.props;
+        this.props.value = value.slice(0, value.length - 1);
+      }
+      if (target.innerHTML === "caps lock") {
+        target.classList.toggle("keyboard__key_active");
+        const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
+        this.#toggleCapsLock(keys);
+      }
+      if (target.innerHTML.length === 1) {
+        this.props.value += this.props.capsLock
+          ? target.innerHTML.toUpperCase()
+          : target.innerHTML.toLowerCase();
+      }
+      console.log(this.props.value);
+    });
+
     this.main.append(this.keysContainer);
-    this.keysContainer.append(this.createKeys());
     document.body.append(this.main);
   }
 
-  createKeys() {
+  #createKeys() {
     const fragment = document.createDocumentFragment();
     console.log(fragment);
     this.lang.en.forEach((key) => {
@@ -205,12 +234,18 @@ export default class keyboard {
     return fragment;
   }
 
-  #triggerEnents(handlerName) {
-    console.log("event: ", handlerName);
-  }
+  #triggerEnents(handlerName) {}
 
-  #toggleCapsLock() {
-    console.log("CapLock toggle!");
+  #toggleCapsLock(keys) {
+    this.props.capsLock = !this.props.capsLock;
+    keys.forEach((key) => {
+      const keyNode = key;
+      if (keyNode.innerHTML.length === 1) {
+        keyNode.innerHTML = this.props.capsLock
+          ? keyNode.innerHTML.toUpperCase()
+          : keyNode.innerHTML.toLowerCase();
+      }
+    });
   }
 
   #open(initialValue, oninput, onclose) {}

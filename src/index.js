@@ -21,4 +21,5 @@ window.onload = () => {
   const keyboard = new Keyboard();
 
   keyboard.init();
+  console.log(keyboard);
 };
