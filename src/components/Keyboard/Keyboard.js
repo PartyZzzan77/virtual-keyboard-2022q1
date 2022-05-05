@@ -25,9 +25,9 @@ export default class keyboard {
         "9",
         "0",
         "-",
-        "+",
-        "del",
-        "tab",
+        "=",
+        "Backspace",
+        "Tab",
         "q",
         "w",
         "e",
@@ -42,7 +42,7 @@ export default class keyboard {
         "]",
         "\\",
         "|",
-        "caps lock",
+        "CapsLock",
         "a",
         "s",
         "d",
@@ -54,7 +54,7 @@ export default class keyboard {
         "l",
         ";",
         "'",
-        "return",
+        "Enter",
         "shift left",
         "z",
         "x",
@@ -68,15 +68,15 @@ export default class keyboard {
         "/",
         "&#9650",
         "shift right",
-        "ctrl L",
+        "ctrl",
         "hide 🥷🏻",
         "alt L",
-        "",
+        " ",
         "alt R",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl R",
+        "Del",
       ],
       ru: [
         "RU",
@@ -93,8 +93,8 @@ export default class keyboard {
         "0",
         "-",
         "=",
-        "del",
-        "tab",
+        "Backspace",
+        "Tab",
         "й",
         "ц",
         "у",
@@ -109,7 +109,7 @@ export default class keyboard {
         "ъ",
         "\\",
         "|",
-        "caps lock",
+        "CapsLock",
         "ф",
         "ы",
         "в",
@@ -121,7 +121,7 @@ export default class keyboard {
         "д",
         "ж",
         "э",
-        "return",
+        "Enter",
         "shift left",
         "я",
         "ч",
@@ -135,15 +135,15 @@ export default class keyboard {
         ".",
         "&#9650",
         "shift right",
-        "ctrl L",
+        "ctrl",
         "hide 🥷🏻",
         "alt L",
-        "",
+        " ",
         "alt R",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl R",
+        "Del",
       ],
     };
     window.localStorage.setItem("en", JSON.stringify(langs.en));
@@ -165,33 +165,37 @@ export default class keyboard {
     document.body.addEventListener("click", (e) => {
       const { target } = e;
 
-      if (target.innerHTML === "return") {
+      if (target.innerHTML === "Enter") {
         this.props.value += "\n";
       }
-      if (target.innerHTML === "") {
+      if (target.innerHTML === " ") {
         this.props.value += " ";
       }
-      if (target.innerHTML === "tab") {
+      if (target.innerHTML === "Tab") {
         this.props.value += "  ";
       }
-      if (target.innerHTML === "del") {
+      if (target.innerHTML === "Backspace") {
         const { value } = this.props;
         this.props.value = value.slice(0, value.length - 1);
       }
-      if (target.innerHTML === "caps lock") {
+      if (target.innerHTML === "Del") {
+        const { value } = this.props;
+        this.props.value = value.slice(1, value.length - 1); //! refactor
+      }
+      if (target.innerHTML === "CapsLock") {
         target.classList.toggle("keyboard__key_active");
         const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
-        this.#toggleCapsLock(keys);
+        this.#toggleCapsKey(keys);
       }
 
       if (target.innerHTML === "EN") {
         localStorage.setItem("lang", "false");
-        this.keysContainer.innerHTML = "";
+        this.keysContainer.innerHTML = " ";
         this.keysContainer.append(this.#createKeys());
       }
       if (target.innerHTML === "RU") {
         window.localStorage.setItem("lang", "true");
-        this.keysContainer.innerHTML = "";
+        this.keysContainer.innerHTML = " ";
         this.keysContainer.append(this.#createKeys());
       }
 
@@ -210,6 +214,79 @@ export default class keyboard {
           : target.innerHTML.toLowerCase();
       }
       field.value = this.props.value;
+    });
+    document.body.addEventListener("keydown", (e) => {
+      console.log(e);
+      console.log("&#9664");
+      const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
+      keys.forEach((key) => {
+        if (e.key === key.innerHTML) {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.code === "ShiftRight" && key.innerHTML === "shift right") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.code === "AltLeft" && key.innerHTML === "alt L") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.code === "AltRight" && key.innerHTML === "alt R") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "Control" && key.innerHTML === "ctrl") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "ArrowUp" && key.innerHTML === "▲") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "ArrowLeft" && key.innerHTML === "◀") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "ArrowRight" && key.innerHTML === "►") {
+          key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "ArrowDown" && key.innerHTML === "▼") {
+          key.classList.add("keyboard__key_active");
+        }
+      });
+    });
+
+    document.body.addEventListener("keyup", (e) => {
+      const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
+      keys.forEach((key) => {
+        if (e.key === key.innerHTML) {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.code === "ShiftRight" && key.innerHTML === "shift right") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.code === "AltLeft" && key.innerHTML === "alt L") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.code === "AltRight" && key.innerHTML === "alt R") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.key === "Control" && key.innerHTML === "ctrl") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.key === "ArrowUp" && key.innerHTML === "▲") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.key === "ArrowLeft" && key.innerHTML === "◀") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.key === "ArrowRight" && key.innerHTML === "►") {
+          key.classList.remove("keyboard__key_active");
+        }
+        if (e.key === "ArrowDown" && key.innerHTML === "▼") {
+          key.classList.remove("keyboard__key_active");
+        }
+      });
     });
 
     this.main.append(this.keysContainer);
@@ -231,22 +308,22 @@ export default class keyboard {
       keyElem.setAttribute("type", "button");
       keyElem.innerHTML = key;
 
-      if (key === "tab" || key === "del") {
+      if (key === "Tab" || key === "Backspace") {
         keyElem.classList.add("keyboard__key_small");
       }
       if (key === "shift left" || key === "shift right") {
         keyElem.classList.add("keyboard__key_large");
       }
-      if (key === "caps lock") {
+      if (key === "CapsLock") {
         keyElem.classList.add(
           "keyboard__key_middle",
           "keyboard__key_activated"
         );
       }
-      if (key === "return") {
+      if (key === "Enter") {
         keyElem.classList.add("keyboard__key_middle");
       }
-      if (key === "") {
+      if (key === " ") {
         keyElem.classList.add("keyboard__key_extra-large");
       }
       if (key === "shift") {
@@ -259,8 +336,8 @@ export default class keyboard {
         );
       }
       if (
-        key === "tab" ||
-        key === "caps lock" ||
+        key === "Tab" ||
+        key === "CapsLock" ||
         key === "shift left" ||
         key === "ctrl L"
       ) {
@@ -273,7 +350,7 @@ export default class keyboard {
     return fragment;
   }
 
-  #toggleCapsLock(keys) {
+  #toggleCapsKey(keys) {
     this.props.capsLock = !this.props.capsLock;
     keys.forEach((key) => {
       const keyNode = key;

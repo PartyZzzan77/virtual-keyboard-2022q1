@@ -35,7 +35,7 @@ transition: bottom .8s
   outline: none;
   color: #82bc9a;
   font-family: monospace;
-  font-size: 1.92rem;
+  font-size: 1.8rem;
   background: rgba($color: #bed1ce, $alpha: .2);
   cursor: pointer;
   vertical-align: top;
@@ -79,6 +79,11 @@ transition: bottom .8s
   background: rgba($color: #bed1ce, $alpha: .12);
 }
 .keyboard__key:active{
+  background: rgba($color: #16cb68, $alpha: .3);
+  box-shadow: 2px 2px 5px  inset rgba($color: #000000, $alpha: .25);
+  
+}
+.keyboard__key_active{
   background: rgba($color: #16cb68, $alpha: .3);
   box-shadow: 2px 2px 5px  inset rgba($color: #000000, $alpha: .25);
   
