@@ -15,11 +15,14 @@ window.onload = () => {
     "subtitle",
     `To switch the keyboard layout, use the keys " "+ " "`
   );
-  const entryField = createArticle("textarea", "entryField");
-  body.append(title, subtitle, entryField);
+  const entryField = createArticle(
+    "textarea",
+    "entryField",
+    "Hello! Check this field"
+  );
+  body.append(title, entryField, subtitle);
 
   const keyboard = new Keyboard();
 
   keyboard.init();
-  console.log(keyboard);
 };

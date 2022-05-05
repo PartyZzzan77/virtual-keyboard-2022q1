@@ -8,15 +8,17 @@ padding: 5px;
 background-color:#004134;
 box-shadow: 0 0 50px rgba($color: #000000, $alpha: .5);
 user-select: none;
-transition: bottom 2.5s
+transition: bottom .8s
 ;
 }
 
-.keyboard__hidden{
+.keyboard_hidden{
   bottom: -100%;
 }
 .keyboard__keys{
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .keyboard__key{
   position: relative;
@@ -26,19 +28,20 @@ transition: bottom 2.5s
 
   width: 6%;
   max-width: 90px;
-  height: 45px;
+  height: 50px;
   margin: 3px;
   border-radius: 4px;
   border: none;
   outline: none;
-  color: #ebd9d9;
-  font-size: 1.01rem;
+  color: #82bc9a;
+  font-family: monospace;
+  font-size: 1.92rem;
   background: rgba($color: #bed1ce, $alpha: .2);
   cursor: pointer;
   vertical-align: top;
 
   &_small{
-  width: 8%;
+  width: 7.8%;
   max-width: 120px;
   }
   &_small_dark{
@@ -47,17 +50,16 @@ transition: bottom 2.5s
 
   &_middle{
     width: 14%;
-    max-width: 180px;
+    max-width: 185px;
   }
   &_large{
-    width:  18%;
+    width:  13.3%;
     max-width: 190px;
   }
 
   &_extra-large{
     width: 44.5%;
     max-width: 90%;
-    height: 45px;
   }
   &_activated:before{
     content: '';
@@ -77,7 +79,6 @@ transition: bottom 2.5s
   background: rgba($color: #bed1ce, $alpha: .12);
 }
 .keyboard__key:active{
-  // border-radius: 8px;
   background: rgba($color: #16cb68, $alpha: .3);
   box-shadow: 2px 2px 5px  inset rgba($color: #000000, $alpha: .25);
   
