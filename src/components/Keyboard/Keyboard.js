@@ -17,7 +17,7 @@ export default class keyboard {
         "0",
         "-",
         "+",
-        "backspace",
+        "del",
         "tab",
         "q",
         "w",
@@ -32,7 +32,7 @@ export default class keyboard {
         "[",
         "]",
         "\\",
-        "del",
+        "|",
         "caps lock",
         "a",
         "s",
@@ -46,7 +46,7 @@ export default class keyboard {
         ";",
         "'",
         "return",
-        "shift",
+        "shift left",
         "z",
         "x",
         "c",
@@ -58,16 +58,16 @@ export default class keyboard {
         ".",
         "/",
         "&#9650",
-        "shift",
-        "ctrl",
+        "shift right",
+        "ctrl L",
         "meta",
-        "alt",
+        "alt L",
         "",
-        "alt",
+        "alt R",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl",
+        "ctrl R",
       ],
       ru: [
         "ё",
@@ -83,7 +83,7 @@ export default class keyboard {
         "0",
         "-",
         "=",
-        "backspace",
+        "del",
         "tab",
         "й",
         "ц",
@@ -98,7 +98,7 @@ export default class keyboard {
         "х",
         "ъ",
         "\\",
-        "del",
+        "|",
         "caps lock",
         "ф",
         "ы",
@@ -112,7 +112,7 @@ export default class keyboard {
         "ж",
         "э",
         "return",
-        "shift",
+        "shift left",
         "я",
         "ч",
         "с",
@@ -124,16 +124,16 @@ export default class keyboard {
         "ю",
         ".",
         "&#9650",
-        "shift",
-        "ctrl",
+        "shift right",
+        "ctrl L",
         "meta",
-        "alt",
+        "alt L",
         "",
-        "alt",
+        "alt R",
         "&#9664",
         "&#9660",
         "&#9658",
-        "ctrl",
+        "ctrl R",
       ],
     };
     this.handlers = {
@@ -169,9 +169,11 @@ export default class keyboard {
       keyElem.setAttribute("type", "button");
       keyElem.innerHTML = key;
 
-      if (key === "tab" || key === "delete") {
-        console.log(keyElem);
+      if (key === "tab" || key === "del") {
         keyElem.classList.add("keyboard__key_small");
+      }
+      if (key === "shift left" || key === "shift right") {
+        keyElem.classList.add("keyboard__key_large");
       }
       if (key === "caps lock") {
         keyElem.classList.add(
@@ -188,10 +190,16 @@ export default class keyboard {
       if (key === "shift") {
         keyElem.classList.add("keyboard__key_large");
       }
-      if (key === "backspace") {
-        console.log(keyElem);
-        keyElem.insertBefore();
+      if (
+        key === "tab" ||
+        key === "caps lock" ||
+        key === "shift left" ||
+        key === "ctrl L"
+      ) {
+        const breakLine = document.createElement("br");
+        fragment.append(breakLine);
       }
+      fragment.append(keyElem);
     });
 
     return fragment;

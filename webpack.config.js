@@ -107,6 +107,9 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
+    client: {
+      overlay: false,
+    },
     port: 4200,
   },
   module: {
