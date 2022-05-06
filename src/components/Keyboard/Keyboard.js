@@ -76,7 +76,7 @@ export default class keyboard {
         "&#9664",
         "&#9660",
         "&#9658",
-        "Del",
+        "Clear",
       ],
       ru: [
         "RU",
@@ -143,7 +143,7 @@ export default class keyboard {
         "&#9664",
         "&#9660",
         "&#9658",
-        "Del",
+        "Clear",
       ],
     };
     window.localStorage.setItem("en", JSON.stringify(langs.en));
@@ -180,8 +180,8 @@ export default class keyboard {
         const { value } = this.props;
         this.props.value = value.slice(0, value.length - 1);
       }
-      if (target.innerHTML === "Del") {
-        this.props.value = ""; //! refactor
+      if (target.innerHTML === "Clear") {
+        this.props.value = "";
       }
       if (target.innerHTML === "CapsLock") {
         target.classList.toggle("keyboard__key_active");
@@ -280,17 +280,15 @@ export default class keyboard {
         if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
           key.classList.add("keyboard__key_active");
           this.#toggleCapsKey(keys);
+          const islang = JSON.parse(localStorage.lang);
           document.addEventListener("keyup", (evt) => {
-            //! refactor
-            const islang = JSON.parse(localStorage.lang);
             if (evt.code === "ShiftRight" && islang) {
-              evt.preventDefault();
               localStorage.setItem("lang", "false");
               this.keysContainer.innerHTML = " ";
               this.keysContainer.append(this.#createKeys());
             }
             if (evt.code === "ShiftRight" && !islang) {
-              evt.preventDefault();
+              console.log(islang);
               window.localStorage.setItem("lang", "true");
               this.keysContainer.innerHTML = " ";
               this.keysContainer.append(this.#createKeys());
@@ -324,6 +322,7 @@ export default class keyboard {
         }
       });
     });
+
     document.body.addEventListener("keyup", (e) => {
       const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
       keys.forEach((key) => {
@@ -368,7 +367,6 @@ export default class keyboard {
     });
 
     this.main.append(this.keysContainer);
-
     document.body.append(this.main);
   }
 
@@ -417,9 +415,10 @@ export default class keyboard {
         key === "Tab" ||
         key === "CapsLock" ||
         key === "shift left" ||
-        key === "ctrl L"
+        key === "ctrl"
       ) {
-        const breakLine = document.createElement("br");
+        const breakLine = document.createElement("div");
+        breakLine.className = "breakline";
         fragment.append(breakLine);
       }
       fragment.append(keyElem);

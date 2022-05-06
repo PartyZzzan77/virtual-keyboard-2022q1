@@ -9,6 +9,7 @@ window.onload = () => {
     article.className = `${className}`;
     return article;
   };
+
   const titleMessage = "RS School Virtual keyboard";
   const messageKeyCombination = `To switch the keyboard layout, use the "shift left" + "shift right" key combination or the "EN/RU" key on the virtual keyboard.`;
   const operationSystemMessage = `The project is written in the system macOS Monterey`;

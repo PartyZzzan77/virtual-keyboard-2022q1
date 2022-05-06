@@ -1,0 +1,3 @@
+@mixin response($min, $max){
+  @media (min-width:$min) and (max-width:$max){@content;}
+}

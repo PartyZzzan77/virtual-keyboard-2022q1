@@ -8,17 +8,14 @@ padding: 5px;
 background-color:#004134;
 box-shadow: 0 0 50px rgba($color: #000000, $alpha: .5);
 user-select: none;
-transition: bottom .8s
-;
+transition: bottom .8s;
 }
 
 .keyboard_hidden{
   bottom: -100%;
 }
 .keyboard__keys{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  text-align: center;
 }
 .keyboard__key{
   position: relative;
@@ -26,7 +23,7 @@ transition: bottom .8s
   justify-content: center;
   align-items: center;
 
-  width: 6%;
+  width: 5%;
   max-width: 90px;
   height: 50px;
   margin: 3px;
@@ -35,31 +32,54 @@ transition: bottom .8s
   outline: none;
   color: #82bc9a;
   font-family: monospace;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   background: rgba($color: #bed1ce, $alpha: .2);
   cursor: pointer;
   vertical-align: top;
 
+  @include response($min:768Px,$max:1279px){
+  width: 5%;
+  font-size: 1.1rem;
+  }
+  @include response($min:10px,$max:767px){
+    width: 5%;
+    font-size: .5rem;
+    height: 30px;
+    margin: 1.5px;
+    }
+
   &_small{
   width: 7.8%;
   max-width: 120px;
+  @include response($min:10px,$max:767px){
+    width: 15%;
+    }
   }
   &_small_dark{
     background: rgba($color: #000000, $alpha: .25);
   }
 
   &_middle{
-    width: 14%;
+    width: 11.9%;
     max-width: 190px;
+    @include response($min:10px,$max:767px){
+      width: 16%;
+      }
   }
   &_large{
-    width:  13.3%;
+    width:  11.9%;
     max-width: 190px;
+    @include response($min:10px,$max:767px){
+      width: 16%;
+      }
   }
 
   &_extra-large{
-    width: 44.5%;
+    width: 38%;
     max-width: 90%;
+    @include response($min:10px,$max:767px){
+      width: 41%;
+      }
   }
   &_activated:before{
     content: '';
@@ -70,6 +90,12 @@ transition: bottom .8s
     height: 10px;
     border-radius: 50%;
     background: rgba($color: #000000, $alpha: .4);
+    @include response($min:10px,$max:767px){
+      top: 5px;
+      left: 5px;
+      width: 5px;
+      height: 5px;
+      }
   }
   &_active:before{
     background: #08ff00;
@@ -86,5 +112,6 @@ transition: bottom .8s
   background: rgba($color: #16cb68, $alpha: .3);
   box-shadow: 2px 2px 5px  inset rgba($color: #000000, $alpha: .25);
 }
+
 
 

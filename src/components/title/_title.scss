@@ -1,8 +1,11 @@
 .title{
-  margin: 10px;
+  margin-top: 50px;
   font-family: monospace, sans-serif;
   color: #95629d;
   font-weight: bold;
   font-size: 5rem;
   text-align: center;
+  @include response($min:10px,$max:767px){
+    font-size: 2.5rem;
+    }
 }

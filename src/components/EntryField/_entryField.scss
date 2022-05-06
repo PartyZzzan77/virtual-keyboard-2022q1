@@ -15,6 +15,10 @@
   outline: none;
   background: rgba($color:#82bc9a , $alpha: .9);
   transition:background 3s;
+  @include response($min:10px,$max:767px){
+    font-size: 1.5rem;
+    width: 90%;
+    }
 }
 .entryField:focus{
   outline: none;
