@@ -164,6 +164,7 @@ export default class keyboard {
 
     document.body.addEventListener("click", (e) => {
       const { target } = e;
+      console.log(target);
 
       if (target.innerHTML === "Enter") {
         this.props.value += "\n";
@@ -172,6 +173,7 @@ export default class keyboard {
         this.props.value += " ";
       }
       if (target.innerHTML === "Tab") {
+        e.preventDefault();
         this.props.value += "  ";
       }
       if (target.innerHTML === "Backspace") {
@@ -215,13 +217,66 @@ export default class keyboard {
       }
       field.value = this.props.value;
     });
-    document.body.addEventListener("keydown", (e) => {
-      console.log(e);
-      console.log("&#9664");
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key.length === 1) {
+        e.preventDefault();
+        this.props.value += e.key;
+        field.value = this.props.value;
+      }
+
       const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
       keys.forEach((key) => {
         if (e.key === key.innerHTML) {
           key.classList.add("keyboard__key_active");
+        }
+        if (e.key === "CapsLock" && key.innerHTML === "CapsLock") {
+          e.preventDefault();
+          key.classList.add("keyboard__key__activ");
+          this.#toggleCapsKey(keys);
+        }
+        if (e.key === "Tab" && key.innerHTML === "Tab") {
+          e.preventDefault();
+          this.props.value += "  ";
+          field.value = this.props.value;
+        }
+        if (e.key === " " && key.innerHTML === " ") {
+          e.preventDefault();
+          this.props.value += "  ";
+          field.value = this.props.value;
+        }
+        if (e.key === "Enter" && key.innerHTML === "Enter") {
+          e.preventDefault();
+          this.props.value += "\n";
+          field.value = this.props.value;
+        }
+        if (e.key === "Backspace" && key.innerHTML === "Backspace") {
+          e.preventDefault();
+          this.props.value = this.props.value.slice(
+            0,
+            this.props.value.length - 1
+          );
+          field.value = this.props.value;
+        }
+        if (e.key === "ArrowUp" && key.innerHTML === "▲") {
+          e.preventDefault();
+          this.props.value += "▲";
+          field.value = this.props.value;
+        }
+        if (e.key === "ArrowLeft" && key.innerHTML === "◀") {
+          e.preventDefault();
+          this.props.value += "◀";
+          field.value = this.props.value;
+        }
+        if (e.key === "ArrowRight" && key.innerHTML === "►") {
+          e.preventDefault();
+          this.props.value += "►";
+          field.value = this.props.value;
+        }
+        if (e.key === "ArrowDown" && key.innerHTML === "▼") {
+          e.preventDefault();
+          this.props.value += "▼";
+          field.value = this.props.value;
         }
         if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
           key.classList.add("keyboard__key_active");
@@ -252,12 +307,16 @@ export default class keyboard {
         }
       });
     });
-
     document.body.addEventListener("keyup", (e) => {
       const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
       keys.forEach((key) => {
         if (e.key === key.innerHTML) {
           key.classList.remove("keyboard__key_active");
+          this.props.value += "";
+        }
+        if (e.key === "CapsLock" && key.innerHTML === "CapsLock") {
+          key.classList.remove("keyboard__key_active");
+          this.#toggleCapsKey(keys);
         }
         if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
           key.classList.remove("keyboard__key_active");
