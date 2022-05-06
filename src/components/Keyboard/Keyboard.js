@@ -181,8 +181,7 @@ export default class keyboard {
         this.props.value = value.slice(0, value.length - 1);
       }
       if (target.innerHTML === "Del") {
-        const { value } = this.props;
-        this.props.value = value.slice(1, value.length - 1); //! refactor
+        this.props.value = ""; //! refactor
       }
       if (target.innerHTML === "CapsLock") {
         target.classList.toggle("keyboard__key_active");
@@ -232,7 +231,7 @@ export default class keyboard {
         }
         if (e.key === "CapsLock" && key.innerHTML === "CapsLock") {
           e.preventDefault();
-          key.classList.add("keyboard__key__activ");
+          key.classList.add("keyboard__key__active");
           this.#toggleCapsKey(keys);
         }
         if (e.key === "Tab" && key.innerHTML === "Tab") {
@@ -280,9 +279,27 @@ export default class keyboard {
         }
         if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
           key.classList.add("keyboard__key_active");
+          this.#toggleCapsKey(keys);
+          document.addEventListener("keyup", (evt) => {
+            //! refactor
+            const islang = JSON.parse(localStorage.lang);
+            if (evt.code === "ShiftRight" && islang) {
+              evt.preventDefault();
+              localStorage.setItem("lang", "false");
+              this.keysContainer.innerHTML = " ";
+              this.keysContainer.append(this.#createKeys());
+            }
+            if (evt.code === "ShiftRight" && !islang) {
+              evt.preventDefault();
+              window.localStorage.setItem("lang", "true");
+              this.keysContainer.innerHTML = " ";
+              this.keysContainer.append(this.#createKeys());
+            }
+          });
         }
         if (e.code === "ShiftRight" && key.innerHTML === "shift right") {
           key.classList.add("keyboard__key_active");
+          this.#toggleCapsKey(keys);
         }
         if (e.code === "AltLeft" && key.innerHTML === "alt L") {
           key.classList.add("keyboard__key_active");
@@ -320,9 +337,11 @@ export default class keyboard {
         }
         if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
           key.classList.remove("keyboard__key_active");
+          this.#toggleCapsKey(keys);
         }
         if (e.code === "ShiftRight" && key.innerHTML === "shift right") {
           key.classList.remove("keyboard__key_active");
+          this.#toggleCapsKey(keys);
         }
         if (e.code === "AltLeft" && key.innerHTML === "alt L") {
           key.classList.remove("keyboard__key_active");

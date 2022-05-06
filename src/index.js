@@ -9,18 +9,20 @@ window.onload = () => {
     article.className = `${className}`;
     return article;
   };
-  const title = createArticle("h1", "title", "RS School Virtual keyboard");
-  const subtitle = createArticle(
-    "h3",
-    "subtitle",
-    `To switch the keyboard layout, use the keys " "+ " "`
-  );
+  const titleMessage = "RS School Virtual keyboard";
+  const messageKeyCombination = `To switch the keyboard layout, use the "shift left" + "shift right" key combination or the "EN/RU" key on the virtual keyboard.`;
+  const operationSystemMessage = `The project is written in the system macOS Monterey`;
+
+  const title = createArticle("h1", "title", titleMessage);
+  const subtitle = createArticle("h3", "subtitle", messageKeyCombination);
   const entryField = createArticle(
     "textarea",
     "entryField",
     "Hello! Check this field"
   );
-  body.append(title, entryField, subtitle);
+
+  const systemText = createArticle("h3", "ostext", operationSystemMessage);
+  body.append(title, entryField, subtitle, systemText);
 
   const keyboard = new Keyboard();
 
