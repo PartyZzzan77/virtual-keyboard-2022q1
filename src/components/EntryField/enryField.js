@@ -1,8 +1,8 @@
-import createCustomElement from "../../utils/helpers/helpers";
+import createCustomElement from "../../utils/helpers/createCustomElement ";
 
 const entryField = createCustomElement(
   "textarea",
-  "entryField",
-  "Hello! Check this field"
+  "Hello! Check this field",
+  "entryField"
 );
 export default entryField;

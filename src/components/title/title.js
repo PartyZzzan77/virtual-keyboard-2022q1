@@ -1,5 +1,5 @@
-import createCustomElement from "../../utils/helpers/helpers";
+import createCustomElement from "../../utils/helpers/createCustomElement ";
 
 const titleMessage = "RS School Virtual keyboard";
-const title = createCustomElement("h1", "title", titleMessage);
+const title = createCustomElement("h1", titleMessage, "title");
 export default title;
