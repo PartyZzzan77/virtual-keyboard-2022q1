@@ -43,18 +43,6 @@ const babelOptions = (preset) => {
   return opts;
 };
 
-// const jsLoaders = () => {
-//   const loaders = [{
-//     loader: 'babel-loader',
-//     options: babelOptions()
-//   }]
-
-//   if (isDev) {
-//     loaders.push('eslint-loader')
-//   }
-
-//   return loaders
-// };
 const plugins = () => {
   const base = [
     new HtmlWebpackPlugin({
@@ -71,10 +59,10 @@ const plugins = () => {
           from: path.resolve(__dirname, "./src/favicon.png"),
           to: path.resolve(__dirname, "./dist"),
         },
-        {
-          from: path.resolve(__dirname, "./src/assets/fonts"),
-          to: path.resolve(__dirname, "./dist/fonts"),
-        },
+        // {
+        //   from: path.resolve(__dirname, "./src/assets/fonts"),
+        //   to: path.resolve(__dirname, "./dist/fonts"),
+        // },
       ],
     }),
     new MiniCssExtractPlugin({
