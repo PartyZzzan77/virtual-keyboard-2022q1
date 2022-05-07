@@ -90,12 +90,12 @@ module.exports = {
   },
   resolve: {
     extensions: [".html", ".js", ".css", ".json", ".png"],
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@styles": path.resolve(__dirname, "src/styles"),
-      "@models": path.resolve(__dirname, "src/assets/models"),
-      "@images": path.resolve(__dirname, "src/assets/images"),
-    },
+    // alias: {
+    //   "@": path.resolve(__dirname, "src"),
+    //   "@styles": path.resolve(__dirname, "src/styles"),
+    //   "@models": path.resolve(__dirname, "src/assets/models"),
+    //   "@images": path.resolve(__dirname, "src/assets/images"),
+    // },
   },
   optimization: optimization(),
   devServer: {
