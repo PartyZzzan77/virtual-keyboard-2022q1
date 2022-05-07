@@ -18,7 +18,6 @@ export default class keyboard {
       value: "",
       capsLock: false,
     };
-
     this.clickHandler = clickHandler.bind(this);
     this.keyDownHandler = keyDownHandler.bind(this);
     this.keyUpHandler = keyUpHandler.bind(this);
