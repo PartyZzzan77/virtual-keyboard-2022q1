@@ -164,7 +164,10 @@ export default class keyboard {
 
     document.body.addEventListener("click", (e) => {
       const { target } = e;
-      console.log(target);
+
+      if (target.closest(".keyboard__key")) {
+        field.focus();
+      }
 
       if (target.innerHTML === "Enter") {
         this.props.value += "\n";
@@ -204,7 +207,8 @@ export default class keyboard {
         target.innerHTML === "hide 🥷🏻" ||
         target === document.body ||
         target.closest(".title") ||
-        target.closest(".subtitle")
+        target.closest(".subtitle") ||
+        target.closest(".ostext")
       ) {
         this.main.classList.add("keyboard_hidden");
       }
@@ -288,7 +292,6 @@ export default class keyboard {
               this.keysContainer.append(this.#createKeys());
             }
             if (evt.code === "ShiftRight" && !islang) {
-              console.log(islang);
               window.localStorage.setItem("lang", "true");
               this.keysContainer.innerHTML = " ";
               this.keysContainer.append(this.#createKeys());
@@ -324,6 +327,7 @@ export default class keyboard {
     });
 
     document.body.addEventListener("keyup", (e) => {
+      field.focus();
       const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
       keys.forEach((key) => {
         if (e.key === key.innerHTML) {
