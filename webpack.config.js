@@ -71,6 +71,10 @@ const plugins = () => {
           from: path.resolve(__dirname, "./src/favicon.png"),
           to: path.resolve(__dirname, "./dist"),
         },
+        {
+          from: path.resolve(__dirname, "./src/assets/fonts"),
+          to: path.resolve(__dirname, "./dist/fonts"),
+        },
       ],
     }),
     new MiniCssExtractPlugin({
@@ -120,6 +124,10 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       { test: /\.(png|jpg|gif)$/i, type: "asset/resource" },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file-loader",
+      },
       { test: /\.xml$/, use: ["xml-loader"] },
       { test: /\.csv$/, use: ["csv-loader"] },
       {

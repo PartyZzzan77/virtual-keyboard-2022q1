@@ -1,8 +1,9 @@
 .ostext{
-  margin-top: 20px;
+  @extend %font-additional;
+  margin-top: 40px;
   text-align: center;
-  font-size: 3rem;
-  font-style: italic;
+  font-size: 2rem;
+  font-weight: bold;
   @include response($min:10px,$max:767px){
     font-size: 1.5rem;
     }
