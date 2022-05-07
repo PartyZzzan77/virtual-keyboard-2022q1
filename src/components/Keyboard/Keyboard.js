@@ -76,7 +76,7 @@ export default class keyboard {
         "&#9664",
         "&#9660",
         "&#9658",
-        "Clear",
+        "del",
       ],
       ru: [
         "RU",
@@ -143,7 +143,7 @@ export default class keyboard {
         "&#9664",
         "&#9660",
         "&#9658",
-        "Clear",
+        "del",
       ],
     };
     window.localStorage.setItem("en", JSON.stringify(langs.en));
@@ -173,18 +173,20 @@ export default class keyboard {
         this.props.value += "\n";
       }
       if (target.innerHTML === " ") {
-        this.props.value += " ";
+        this.props.value += "";
       }
       if (target.innerHTML === "Tab") {
         e.preventDefault();
-        this.props.value += "  ";
+        this.props.value += "   ";
       }
       if (target.innerHTML === "Backspace") {
         const { value } = this.props;
         this.props.value = value.slice(0, value.length - 1);
       }
-      if (target.innerHTML === "Clear") {
-        this.props.value = "";
+      if (target.innerHTML === "del") {
+        this.props.value =
+          this.props.value.slice(0, field.selectionStart - 1) +
+          this.props.value.slice(field.selectionStart);
       }
       if (target.innerHTML === "CapsLock") {
         target.classList.toggle("keyboard__key_active");
@@ -240,12 +242,17 @@ export default class keyboard {
         }
         if (e.key === "Tab" && key.innerHTML === "Tab") {
           e.preventDefault();
-          this.props.value += "  ";
+          this.props.value += "   ";
           field.value = this.props.value;
+        }
+        if (e.key === "Delete" && key.innerHTML === "del") {
+          this.props.value =
+            this.props.value.slice(0, field.selectionStart - 1) +
+            this.props.value.slice(field.selectionStart);
         }
         if (e.key === " " && key.innerHTML === " ") {
           e.preventDefault();
-          this.props.value += "  ";
+          this.props.value += "";
           field.value = this.props.value;
         }
         if (e.key === "Enter" && key.innerHTML === "Enter") {
