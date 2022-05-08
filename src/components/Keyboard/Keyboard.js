@@ -11,6 +11,7 @@ import upperLatter from "../../utils/helpers/upperLatter";
 import lowerLatter from "../../utils/helpers/lowerLetter";
 import toggleLangs from "../../utils/helpers/toggleLangs";
 import addValue from "../../utils/helpers/addValue";
+import setCaret from "../../utils/helpers/setCaret";
 
 export default class keyboard {
   constructor() {
@@ -32,6 +33,7 @@ export default class keyboard {
     this.toggleCapsKey = toggleCapsKey.bind(this);
     this.toggleLangsHandler = toggleLangs.bind(this);
     this.addValue = addValue.bind(this);
+    this.setCaret = setCaret.bind(this);
   }
 
   run() {

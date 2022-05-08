@@ -22,9 +22,7 @@ function keyDownHandler(e) {
       this.addValue(e, "   ");
     }
     if (e.key === "Delete" && key.innerHTML === "del") {
-      this.props.value =
-        this.props.value.slice(0, this.field.selectionStart - 1) +
-        this.props.value.slice(this.field.selectionStart);
+      this.setCaret();
     }
     if (e.key === " " && key.innerHTML === " ") {
       this.addValue(e, "");
