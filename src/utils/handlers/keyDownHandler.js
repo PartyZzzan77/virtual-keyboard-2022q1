@@ -52,7 +52,6 @@ function keyDownHandler(e) {
     }
     if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
       key.classList.add("keyboard__key_active");
-
       this.toggleLangsHandler();
     }
     if (
