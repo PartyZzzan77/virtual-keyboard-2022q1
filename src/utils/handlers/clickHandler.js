@@ -25,9 +25,10 @@ function clickHandler(e) {
     this.props.value = value.slice(0, value.length - 1);
   }
   if (target.innerHTML === "del") {
+    const start = this.field.selectionStart - 1;
+    const end = this.field.selectionStart;
     this.props.value =
-      this.props.value.slice(0, this.field.selectionStart - 1) +
-      this.props.value.slice(this.field.selectionStart);
+      this.props.value.slice(0, start) + this.props.value.slice(end);
   }
   if (target.innerHTML === "CapsLock") {
     target.classList.toggle("keyboard__key_active");
