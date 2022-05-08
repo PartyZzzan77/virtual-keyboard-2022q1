@@ -1,8 +1,10 @@
 import createKeys from "../helpers/createKeys";
-import toggleCapsKey from "../helpers/toggleCapsKey";
 
 function clickHandler(e) {
   const { target } = e;
+  this.keysCollection = [
+    ...this.keysContainer.querySelectorAll(".keyboard__key"),
+  ];
 
   if (target.closest(".keyboard__key")) {
     this.field.focus();
@@ -29,10 +31,7 @@ function clickHandler(e) {
   }
   if (target.innerHTML === "CapsLock") {
     target.classList.toggle("keyboard__key_active");
-    this.keysCollection = [
-      ...this.keysContainer.querySelectorAll(".keyboard__key"),
-    ];
-    toggleCapsKey(this.keysCollection);
+    this.toggleCapsKey(this.keysCollection);
   }
 
   if (target.innerHTML === "EN") {
@@ -45,7 +44,6 @@ function clickHandler(e) {
     this.keysContainer.innerHTML = " ";
     this.keysContainer.append(createKeys());
   }
-
   if (
     target.innerHTML === "hide 🥷🏻" ||
     target === document.body ||
@@ -61,7 +59,6 @@ function clickHandler(e) {
       ? target.innerHTML.toUpperCase()
       : target.innerHTML.toLowerCase();
   }
-
   this.field.value = this.props.value;
 }
 

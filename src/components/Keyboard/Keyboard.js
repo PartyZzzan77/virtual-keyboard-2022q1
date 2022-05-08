@@ -7,6 +7,10 @@ import keyUpHandler from "../../utils/handlers/keyUpHandler";
 import toggleCapsKey from "../../utils/helpers/toggleCapsKey";
 import createKeys from "../../utils/helpers/createKeys";
 import setLangsStorage from "../../utils/helpers/setLangsStorage";
+import upperLatterHandler from "../../utils/handlers/upperLatterHandler";
+import lowerLatterHandler from "../../utils/handlers/lowerLetterHandler";
+import toggleLangs from "../../utils/helpers/toggleLangs";
+import addValue from "../../utils/helpers/addValue";
 
 export default class keyboard {
   constructor() {
@@ -21,9 +25,13 @@ export default class keyboard {
     this.clickHandler = clickHandler.bind(this);
     this.keyDownHandler = keyDownHandler.bind(this);
     this.keyUpHandler = keyUpHandler.bind(this);
+    this.upperLatterHandler = upperLatterHandler.bind(this);
+    this.lowerLatterHandler = lowerLatterHandler.bind(this);
 
     this.open = open.bind(this);
     this.toggleCapsKey = toggleCapsKey.bind(this);
+    this.toggleLangsHandler = toggleLangs.bind(this);
+    this.addValue = addValue.bind(this);
   }
 
   run() {
@@ -42,6 +50,10 @@ export default class keyboard {
     document.body.addEventListener("click", (e) => {
       this.clickHandler(e, this.field);
     });
+
+    document.body.addEventListener("mousedown", this.upperLatterHandler);
+
+    document.body.addEventListener("mouseup", this.lowerLatterHandler);
 
     document.addEventListener("keydown", (e) => {
       this.keyDownHandler(e);

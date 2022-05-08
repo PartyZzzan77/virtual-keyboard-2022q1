@@ -68,7 +68,7 @@ const langsDictionary = {
   ],
   ru: [
     "RU",
-    "ё",
+    "]",
     "1",
     "2",
     "3",
