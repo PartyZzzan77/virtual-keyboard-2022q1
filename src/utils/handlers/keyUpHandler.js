@@ -14,9 +14,10 @@ function keyUpHandler(e) {
       this.toggleCapsKey(keys);
     }
     if (
-      e.altKey ||
       (e.code === "ShiftLeft" && key.innerHTML === "shift left") ||
       (e.code === "ShiftRight" && key.innerHTML === "shift right") ||
+      (e.code === "AltLeft" && key.innerHTML === "alt L") ||
+      (e.code === "AltRight" && key.innerHTML === "alt R") ||
       (e.key === "Control" && key.innerHTML === "ctrl") ||
       (e.key === "ArrowUp" && key.innerHTML === "▲") ||
       (e.key === "ArrowLeft" && key.innerHTML === "◀") ||

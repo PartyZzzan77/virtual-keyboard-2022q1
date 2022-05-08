@@ -5,6 +5,7 @@ function keyDownHandler(e) {
     this.field.value = this.props.value;
   }
   if (e.altKey) {
+    console.log("test");
     e.preventDefault();
   }
 
