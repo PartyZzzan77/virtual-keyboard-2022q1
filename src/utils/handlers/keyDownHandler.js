@@ -4,6 +4,9 @@ function keyDownHandler(e) {
     this.props.value += e.key;
     this.field.value = this.props.value;
   }
+  if (e.altKey) {
+    e.preventDefault();
+  }
 
   this.upperLatterHandler(e);
 
@@ -52,6 +55,7 @@ function keyDownHandler(e) {
       key.classList.add("keyboard__key_active");
       this.toggleLangsHandler();
     }
+
     if (
       (e.code === "ShiftRight" && key.innerHTML === "shift right") ||
       (e.code === "AltLeft" && key.innerHTML === "alt L") ||

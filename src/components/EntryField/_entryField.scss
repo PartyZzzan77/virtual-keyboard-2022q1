@@ -24,8 +24,7 @@
 }
 .entryField:focus{
   outline: none;
-  border: 2px dotted #004134;
-  background: rgba($color:#82bc9a , $alpha: .6);
+  background: rgba($color:#a3debbe6, $alpha: .9);
   transition:background 3s;
 }
 

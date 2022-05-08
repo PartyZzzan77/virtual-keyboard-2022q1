@@ -22,6 +22,27 @@ function upperLatter(e) {
     }
     this.keysCollection.forEach((key) => {
       const keyNode = key;
+      if (keyNode.innerHTML === "[") {
+        keyNode.innerHTML = "{";
+      }
+      if (keyNode.innerHTML === "]") {
+        keyNode.innerHTML = "}";
+      }
+      if (keyNode.innerHTML === ";") {
+        keyNode.innerHTML = ":";
+      }
+      if (keyNode.innerHTML === "'") {
+        keyNode.innerHTML = '"';
+      }
+      if (keyNode.innerHTML === ",") {
+        keyNode.innerHTML = "<";
+      }
+      if (keyNode.innerHTML === ".") {
+        keyNode.innerHTML = ">";
+      }
+      if (keyNode.innerHTML === "/") {
+        keyNode.innerHTML = "?";
+      }
       if (keyNode.innerHTML.length === 1) {
         keyNode.innerHTML = keyNode.innerHTML.toUpperCase();
       }
