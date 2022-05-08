@@ -1,6 +1,9 @@
 function keyUpHandler(e) {
   this.field.focus();
   const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
+
+  this.lowerLatterHandler(e);
+
   keys.forEach((key) => {
     if (e.key === key.innerHTML) {
       key.classList.remove("keyboard__key_active");
@@ -10,15 +13,9 @@ function keyUpHandler(e) {
       key.classList.remove("keyboard__key_active");
       this.toggleCapsKey(keys);
     }
-    if (e.code === "ShiftLeft" && key.innerHTML === "shift left") {
-      key.classList.remove("keyboard__key_active");
-      this.lowerLatterHandler(e);
-    }
-    if (e.code === "ShiftRight" && key.innerHTML === "shift right") {
-      key.classList.remove("keyboard__key_active");
-      this.lowerLatterHandler(e);
-    }
     if (
+      (e.code === "ShiftLeft" && key.innerHTML === "shift left") ||
+      (e.code === "ShiftRight" && key.innerHTML === "shift right") ||
       (e.code === "AltLeft" && key.innerHTML === "alt L") ||
       (e.code === "AltRight" && key.innerHTML === "alt R") ||
       (e.key === "Control" && key.innerHTML === "ctrl") ||

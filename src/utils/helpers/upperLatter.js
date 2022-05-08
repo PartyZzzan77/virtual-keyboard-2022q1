@@ -1,10 +1,15 @@
 import upperCharsRU from "../data/upperCharsRU";
 import upperCharsEN from "../data/upperCharsEN";
 
-function upperLatterHandler(e) {
-  console.log("test");
+function upperLatter(e) {
   const { target } = e;
-  if (target.innerHTML === "shift left" || target.innerHTML === "shift right") {
+
+  if (
+    target.innerHTML === "shift left" ||
+    target.innerHTML === "shift right" ||
+    e.code === "ShiftLeft" ||
+    e.code === "ShiftRight"
+  ) {
     this.keysCollection = this.keysContainer.querySelectorAll(".keyboard__key");
 
     const upperChars =
@@ -23,4 +28,4 @@ function upperLatterHandler(e) {
     });
   }
 }
-export default upperLatterHandler;
+export default upperLatter;

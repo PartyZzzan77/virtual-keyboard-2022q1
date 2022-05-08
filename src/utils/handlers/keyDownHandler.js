@@ -5,7 +5,10 @@ function keyDownHandler(e) {
     this.field.value = this.props.value;
   }
 
+  this.upperLatterHandler(e);
+
   const keys = [...this.keysContainer.querySelectorAll(".keyboard__key")];
+
   keys.forEach((key) => {
     if (e.key === key.innerHTML) {
       key.classList.add("keyboard__key_active");

@@ -10,7 +10,7 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint-fix": "eslint ./src --fix"
   },
   "author": "PartyZzzan77 <partyzan327@gmail.com>",
   "browserslist": "> 0.25%, not dead",

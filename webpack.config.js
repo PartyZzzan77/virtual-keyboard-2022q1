@@ -59,10 +59,6 @@ const plugins = () => {
           from: path.resolve(__dirname, "./src/favicon.png"),
           to: path.resolve(__dirname, "./dist"),
         },
-        // {
-        //   from: path.resolve(__dirname, "./src/assets/fonts"),
-        //   to: path.resolve(__dirname, "./dist/fonts"),
-        // },
       ],
     }),
     new MiniCssExtractPlugin({
@@ -90,12 +86,6 @@ module.exports = {
   },
   resolve: {
     extensions: [".html", ".js", ".css", ".json", ".png"],
-    // alias: {
-    //   "@": path.resolve(__dirname, "src"),
-    //   "@styles": path.resolve(__dirname, "src/styles"),
-    //   "@models": path.resolve(__dirname, "src/assets/models"),
-    //   "@images": path.resolve(__dirname, "src/assets/images"),
-    // },
   },
   optimization: optimization(),
   devServer: {
