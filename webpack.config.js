@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 const isDev = process.env.NODE_ENV === "development";
@@ -40,6 +41,35 @@ const babelOptions = (preset) => {
   }
 
   return opts;
+};
+
+const plugins = () => {
+  const base = [
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      title: "Virtual Keyboard",
+
+      minify: {
+        collapseWhitespace: isProd,
+      },
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./src/favicon.png"),
+          to: path.resolve(__dirname, "./dist"),
+        },
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: filename("css"),
+    }),
+    new ESLintPlugin(),
+  ];
+  if (isProd) {
+    base.push(new BundleAnalyzerPlugin());
+  }
+  return base;
 };
 
 module.exports = {
@@ -91,26 +121,5 @@ module.exports = {
     ],
   },
   devtool: isDev ? "source-map" : false,
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./index.html",
-      title: "Virtual Keyboard",
-
-      minify: {
-        collapseWhitespace: isProd,
-      },
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "./src/favicon.png"),
-          to: path.resolve(__dirname, "./dist"),
-        },
-      ],
-    }),
-    new MiniCssExtractPlugin({
-      filename: filename("css"),
-    }),
-    new ESLintPlugin(),
-  ],
+  plugins: plugins(),
 };
