@@ -4,10 +4,6 @@ function keyDownHandler(e) {
     this.props.value += e.key;
     this.field.value = this.props.value;
   }
-  if (e.altKey) {
-    console.log("test");
-    e.preventDefault();
-  }
 
   this.upperLatterHandler(e);
 
