@@ -1,0 +1,18 @@
+@import"~normalize.css";
+@import"./base/reset";
+@import "./base/base";
+
+@import "./abstracts/variables";
+@import"./abstracts/mixins";
+@import"./abstracts/placeholders";
+
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Roboto+Mono:wght@400;700&display=swap');
+
+@import "./../components/title/title";
+@import "./../components/subtitle/subtitle";
+@import "./../components/ostext/ostext";
+@import"./../components/EntryField/entryField.scss";
+@import"./../components/breakline/breakline";
+@import"./../components/Keyboard/Keyboard.scss";
+
+
